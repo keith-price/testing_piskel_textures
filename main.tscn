@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3rttmjc0xtjn"]
+
+[ext_resource type="PackedScene" uid="uid://3ibrvskl2l1s" path="res://character.tscn" id="1_8um2u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oqk2m"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fx1ig"]
+material = SubResource("StandardMaterial3D_oqk2m")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lxver"]
+size = Vector3(2.03296, 1, 2.25488)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(10, 0, 0, 0, 3, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_fx1ig")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.84235e-05, 0.00336568, -0.000269747)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.011, -0.56365, 0.06)
+shape = SubResource("BoxShape3D_lxver")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_8um2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15873, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
